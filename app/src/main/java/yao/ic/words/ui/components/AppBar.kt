@@ -17,6 +17,7 @@ import yao.ic.words.ui.theme.WordsTheme
  * @param modifier The modifier to be applied to the [AppBar].
  * @param title The title to be displayed in the [AppBar].
  * @param navigationIcon The icon to be displayed as the navigation icon in the [AppBar].
+ * @param actions The content to be displayed in the [AppBar] actions area.
  * */
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,6 +26,7 @@ fun AppBar(
     modifier: Modifier = Modifier,
     title: String = stringResource(id = R.string.app_name),
     navigationIcon: @Composable (() -> Unit) = {},
+    actions : @Composable () -> Unit = {}
 ){
     // A [CenterAlignedTopAppBar] is a [TopAppBar] that aligns the title and navigation icon at the center.
     CenterAlignedTopAppBar(
@@ -36,11 +38,13 @@ fun AppBar(
             )
         },
         navigationIcon = navigationIcon,
+        actions = { actions() },
         // Customizes the colors of the [CenterAlignedTopAppBar].
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = MaterialTheme.colorScheme.onPrimary,
-            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
+            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+            actionIconContentColor = MaterialTheme.colorScheme.onPrimary
         )
     )
 }

@@ -1,13 +1,21 @@
 package yao.ic.words
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import yao.ic.words.ui.screens.MainScreen
 import yao.ic.words.ui.theme.WordsTheme
@@ -16,6 +24,7 @@ import yao.ic.words.utils.LETTER
 class MainActivity : ComponentActivity() {
     // Generates a [CharRange] from 'A' to 'Z' and converts it to a list of strings.
     private val letters = ('A'..'Z').map { it.toString() }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +36,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MainScreen(
                         letters = letters,
-                        onLetterClick = { letter -> goToDetailScreen(letter) }
+                        onLetterClick = ::goToDetailScreen,
+                        onCameraClick = ::onCameraClick
                     )
                 }
             }
@@ -43,6 +53,12 @@ class MainActivity : ComponentActivity() {
         // TODO: Implement an explicit intent that navigates to the detail screen.
         // The intent should pass the letter as an argument to the detail screen.
         // Check the Constants file for the key to use when passing the letter as an argument.
-        Log.d("MainActivity", "Navigating to detail screen for letter: $letter")
+    }
+
+    /**
+     * Navigates to the camera screen when the camera icon is clicked.
+     * */
+    private fun onCameraClick() {
+        // TODO: Implement an explicit intent that navigates to the camera screen.
     }
 }

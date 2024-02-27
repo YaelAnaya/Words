@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,6 +27,7 @@ import yao.ic.words.ui.components.AppBar
  * screen.
  * @param letters The list of letters to display.
  * @param onLetterClick The callback/event to be invoked when a letter is clicked.
+ * @param onCameraClick The callback/event to be invoked when the camera icon is clicked.
  * */
 
 @Composable
@@ -30,13 +35,18 @@ fun MainScreen(
     modifier: Modifier = Modifier,
     letters: List<String> = listOf(),
     onLetterClick: (String) -> Unit = {},
+    onCameraClick: () -> Unit = {}
 ) {
     /* A [Scaffold] is a layout component that provides a material design scaffold for the app.
      In this case, it provides a [TopAppBar] and a content area for the [LazyColumn] that displays
      the list of letters. */
     Scaffold(
         modifier = modifier,
-        topBar = { AppBar() }
+        topBar = {
+            AppBar(
+                actions = { CameraActionButton(onCameraClick) }
+            )
+        }
     ) { innerPadding -> // innerPadding is the padding applied by the Scaffold to the content.
         LazyColumn(
             modifier = modifier
@@ -56,5 +66,21 @@ fun MainScreen(
                 }
             }
         }
+    }
+}
+
+/**
+ * A private component that displays a camera icon in the app bar.
+ * @param onClick The callback/event to be invoked when the camera icon is clicked.
+ * */
+@Composable
+private fun CameraActionButton(
+    onClick: () -> Unit
+) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icons.Default.Camera,
+            contentDescription = "On Back Icon"
+        )
     }
 }

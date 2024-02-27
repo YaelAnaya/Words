@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Camera
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,13 +39,13 @@ fun DetailScreen(
     letter: String,
     words: List<String> = listOf(),
     onWordClick: (String) -> Unit = {},
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = {},
 ) {
     Scaffold(
         topBar = { 
             AppBar(
                 title = stringResource(id = R.string.detail_appbar_title, letter),
-                navigationIcon = { BackNavigationIcon(onBackClick) }
+                navigationIcon = { BackNavigationIcon(onBackClick) },
             )
         }
     ) { innerPadding ->
